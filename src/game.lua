@@ -2,7 +2,7 @@ local state = gstate.new()
 
 
 function state:init()
-
+	a = area.new()
 end
 
 
@@ -54,12 +54,14 @@ end
 
 
 function state:update(dt)
-
+	player.update(dt)
+	a:update(dt)
 end
 
 
 function state:draw()
-
+	player.draw()
+	a:draw()
 end
 
 return state

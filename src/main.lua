@@ -1,6 +1,8 @@
 function love.load(arg)
 	gstate = require "gamestate"
 	game = require("game")
+	require("area")
+	require("player")
 	gstate.switch(game)
 end
 
