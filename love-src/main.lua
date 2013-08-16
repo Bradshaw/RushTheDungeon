@@ -1,9 +1,12 @@
 function love.load(arg)
 	gstate = require "gamestate"
 	game = require("game")
-	require("area")
+	lobby = require("lobby")
 	require("player")
-	gstate.switch(game)
+	require("weapon")
+	require("useful")
+	require("monster")
+	gstate.switch(lobby)
 end
 
 

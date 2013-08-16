@@ -27,7 +27,10 @@ end
 
 
 function state:joystickpressed(joystick, button)
-
+	local newControl = connections.newJoyButton(joystick, button)
+	if newControl then
+		player.newTracked(newControl)
+	end
 end
 
 
@@ -45,6 +48,10 @@ function state:keypressed(key, uni)
 	if key=="escape" then
 		love.event.push("quit")
 	end
+	local newControl = connections.newKeyButton(key)
+	if newControl then
+		player.newTracked(newControl)
+	end
 end
 
 
@@ -55,7 +62,6 @@ end
 
 function state:update(dt)
 	player.update(dt)
-	monster.update(dt)
 	readying = readying + dt
 	for i,v in ipairs(player.tracked) do
 		if not v.control:test() then
@@ -73,9 +79,13 @@ end
 
 
 function state:draw()
-	monster.draw()
 	love.graphics.print("Players: "..#player.tracked, 20,20)
 	player.draw()
+	if readying==0 then
+		love.graphics.print("Everyone hold your buttons!", 50,50)
+	else
+		love.graphics.print("Ready in "..3-math.floor(readying*100)/100, 50,50)
+	end
 end
 
 return state
